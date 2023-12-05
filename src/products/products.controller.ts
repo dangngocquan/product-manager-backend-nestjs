@@ -8,6 +8,6 @@ export class ProductsController {
 
     @Get('id/:id')
     async getProductInformationsById(@Param() id: number) {
-        return this.productsService.getProductInformationsById(id);
+        return this.productsService.findAll();
     }
 }

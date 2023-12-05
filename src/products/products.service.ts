@@ -1,8 +1,23 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Inject} from "@nestjs/common";
+import { InjectRepository, InjectEntityManager, InjectDataSource } from '@nestjs/typeorm';
+import { Repository, EntityManager, DataSource } from 'typeorm';
+import { Product } from "./entities/product.entity";
 
 @Injectable()
 export class ProductsService {
-    getProductInformationsById(id: number) {
-        return "Product by id";
+    constructor(
+        @InjectRepository(Product)
+        private productsResponsitory: Repository<Product>,
+    ) {}
+
+    // getProductInformationsById(id: number) {
+    //     // return this.productRepository.find();
+    // }
+
+    async findAll() {
+        return this.productsResponsitory.find({
+
+        });
     }
-}
+
+}   
