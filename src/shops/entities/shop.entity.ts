@@ -1,4 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Account } from 'src/accounts/entities/account.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
+import { ShopNotify } from './shop-notify.entity';
+import { Product } from 'src/products/entities/product.entity';
+import { FollowerOfShop } from './follower-of-shop.entity';
 
 @Entity({name: 'shops'})
 export class Shop {
@@ -22,4 +26,17 @@ export class Shop {
 
     @Column({name: 'status'})
     status: string;
+
+    @ManyToOne(() => Account, (account) => account.shops)
+    @JoinColumn({name: 'owner_id'})
+    account: Account;
+
+    @OneToMany(() => ShopNotify, (shopNotify) => shopNotify.shop)
+    shopNotifications: ShopNotify[];
+
+    @OneToMany(() => Product, (product) => product.shop)
+    products: Product[];
+
+    @OneToMany(() => FollowerOfShop, (followerOfShop) => followerOfShop.shop)
+    followers: FollowerOfShop[];
 }

@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Account } from './account.entity';
 
 @Entity({name: 'history_logins'})
-export class Client {
+export class HistoryLogin {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -10,4 +11,8 @@ export class Client {
 
     @Column({name: 'time'})
     time: number;
+
+    @ManyToOne(() => Account, (account) => account.historyLogin)
+    @JoinColumn({name: 'account_id'})
+    account: Account;
 }

@@ -1,4 +1,6 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Client } from './client.entity';
+import { Product } from 'src/products/entities/product.entity';
 
 @Entity({name: 'favourite_products'})
 export class FavouriteProduct {
@@ -13,4 +15,12 @@ export class FavouriteProduct {
 
     @Column({name: 'time_liked'})
     timeLiked: number;
+
+    @ManyToOne(() => Client, (client) => client.favouriteProducts)
+    @JoinColumn({name: 'user_id'})
+    client: Client;
+
+    @ManyToOne(() => Product, (product) => product.favouriteProducts)
+    @JoinColumn({name: 'product_id'})
+    product: Product;
 }

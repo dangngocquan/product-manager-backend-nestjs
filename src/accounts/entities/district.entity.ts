@@ -1,4 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany, ManyToOne, JoinColumn } from 'typeorm';
+import { Address } from './address.entity';
+import { Ward } from './ward.entity';
+import { City } from './city.entity';
 
 @Entity({name: 'districts'})
 export class District {
@@ -13,4 +16,14 @@ export class District {
 
     @Column({name: 'status'})
     status: string;
+
+    @OneToMany(() => Address, (address) => address.district)
+    addresses: Address[];
+
+    @OneToMany(() => Ward, (ward) => ward.district)
+    wards: Ward[]; 
+
+    @ManyToOne(() => City, (city) => city.districts)
+    @JoinColumn({name: 'city_id'})
+    city: City;
 }

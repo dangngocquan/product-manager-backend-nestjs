@@ -1,7 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Shop } from './shop.entity';
 
 @Entity({name: 'shop_notifications'})
-export class Ward {
+export class ShopNotify {
     @PrimaryGeneratedColumn()
     id: number;
 
@@ -22,4 +23,8 @@ export class Ward {
 
     @Column({name: 'is_seen'})
     isSeen: number;
+
+    @ManyToOne(() => Shop, (shop) => shop.shopNotifications)
+    @JoinColumn({name: 'shop_id'})
+    shop: Shop;
 }
