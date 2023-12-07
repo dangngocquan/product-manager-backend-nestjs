@@ -15,6 +15,7 @@ export class ProductsService {
     // }
 
     async findAll() {
+        console.log("ABCDE");
         return this.productsResponsitory.find({
 
         });

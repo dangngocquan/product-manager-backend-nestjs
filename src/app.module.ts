@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import { ProductsModule } from './products/products.module';
-import configuration from './configuration';
+// import configuration from './configuration';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
 import { Product } from './products/entities/product.entity';
@@ -38,17 +38,17 @@ import { ProductVariantDetails } from './products/entities/product-variant-detai
 
 @Module({
   imports: [
-    // ConfigModule.forRoot({
-    //   isGlobal: true,
-    //   load: [configuration],
-    // }), 
+    ConfigModule.forRoot({
+      isGlobal: true,
+      // load: [configuration],
+    }), 
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '12345678',
-      database: 'product-manager',
+      // host: new ConfigService().get('PGHOST'),
+      // port: new ConfigService().get('PGPORT'),
+      // username: new ConfigService().get('PGUSER'),
+      // password: new ConfigService().get('PGPASSWOR'),
+      // database: new ConfigService().get('PGDATABASE'),
       entities: [Account, VerifyEmail, Slider, Shop, HistoryLogin, Client, Ward, District, City, ShopNotify, Category,
         Product, FollowerOfShop, FavouriteProduct, Cart, HistorySearch, FollowerOfUser, UserNotify, Address, PaymentMethod,
         ProductOfCategory, ProductImage, ProductVariant, ProductOfCart, DeliveryCenter, OrderProcess, OrderPaymentInfo, 
