@@ -10,7 +10,7 @@ export class Category {
     name: string;
 
     @Column({name: 'image'})
-    image: string; 
+    image: string;
 
     @Column({name: 'level'})
     level: number;

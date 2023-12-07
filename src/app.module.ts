@@ -54,11 +54,11 @@ import { ProductVariantDetails } from './products/entities/product-variant-detai
         ProductOfCategory, ProductImage, ProductVariant, ProductOfCart, DeliveryCenter, OrderProcess, OrderPaymentInfo, 
         Variant, Order, VariantValue, ProductVariantDetails
       ],
-      autoLoadEntities: true,
+      // autoLoadEntities: true,
       // "entities": [
       //   __dirname + "entities/**/*.entity.ts"
       // ],
-      synchronize: true,
+      synchronize: false,
     }),
     ProductsModule
   ],
